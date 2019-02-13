@@ -1,6 +1,6 @@
 # 3308 Campaign 03 -- Learning Tree Classification
 
-## Due Date: February 10, 2019 @ 2300
+## Due Date: February 26, 2019 @ 2300
 
 ## Purpose
 * Work with trees
