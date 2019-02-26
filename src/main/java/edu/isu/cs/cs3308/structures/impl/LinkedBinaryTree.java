@@ -9,29 +9,31 @@ import edu.isu.cs.cs3308.structures.Node;
 
 public class LinkedBinaryTree<E> implements BinaryTree<E> {
     /**
-     * Nested Class for BinaryTreeNode with a left and right child
+     * Nested Class for BinaryTreeNode with a root and two children.
+     * Two constructors; First to set item, and set nodes to null; Other to set all
      */
     public static class BinaryTreeNode<E> implements Node<E>{
-
         private E element;
-        private BinaryTreeNode<E> left, right;
+        private BinaryTreeNode<E> root, left, right;
 
         public BinaryTreeNode(E item){
             element = item;
+            root = null;
             left = null;
             right = null;
         }
 
-        public BinaryTreeNode(E item, LinkedBinaryTree<E> left, LinkedBinaryTree<E> right){
+        public BinaryTreeNode(E item, BinaryTreeNode<E> parent, BinaryTreeNode<E> leftChild, BinaryTreeNode<E> rightChild){
             element = item;
-            if (left == null)
-                this.left = null;
-            else
-                this.left = left.getRootNode();
+            root = parent;
+            left = leftChild;
+            right = rightChild;
+
         }
+
         @Override
         public E getElement() {
-            return null;
+            return element;
         }
 
         @Override
@@ -41,7 +43,7 @@ public class LinkedBinaryTree<E> implements BinaryTree<E> {
 
         @Override
         public Node<E> getParent() {
-            return null;
+            return root;
         }
     }
     public LinkedBinaryTree() {
