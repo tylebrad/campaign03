@@ -8,48 +8,80 @@ import edu.isu.cs.cs3308.structures.BinaryTree;
 import edu.isu.cs.cs3308.structures.Node;
 
 public class LinkedBinaryTree<E> implements BinaryTree<E> {
+
     /**
-     * Nested Class for BinaryTreeNode with a root and two children.
-     * Two constructors; First to set item, and set nodes to null; Other to set all
+     * Nested Class for the LinkedBinaryTree's Nodes
      */
-    public static class BinaryTreeNode<E> implements Node<E>{
-        private E element;
-        private BinaryTreeNode<E> root, left, right;
+    public static class BinaryTreeNode<E> implements Node<E> {
+        public E element;
+        public BinaryTreeNode<E> parent, left, right;
 
-        public BinaryTreeNode(E item){
+        public BinaryTreeNode(E item, BinaryTreeNode<E> above, BinaryTreeNode<E> leftChild, BinaryTreeNode<E> rightChild) {
             element = item;
-            root = null;
-            left = null;
-            right = null;
-        }
-
-        public BinaryTreeNode(E item, BinaryTreeNode<E> parent, BinaryTreeNode<E> leftChild, BinaryTreeNode<E> rightChild){
-            element = item;
-            root = parent;
+            parent = above;
             left = leftChild;
             right = rightChild;
 
         }
-
+        //  Access Methods
         @Override
         public E getElement() {
             return element;
         }
 
         @Override
-        public void setElement(E element) throws IllegalArgumentException {
-
-        }
-
-        @Override
         public Node<E> getParent() {
-            return root;
+            return parent;
+        }
+
+        public Node<E> getLeft() {
+            return left;
+        }
+
+        public Node<E> getRight() {
+            return right;
+        }
+
+        //  Update Methods
+        @Override
+        public void setElement(E element) throws IllegalArgumentException {
+            this.element = element;
+        }
+
+        public void setParent(BinaryTreeNode<E> parentNode) {
+            parent = parentNode;
+        }
+
+        public void setLeft(BinaryTreeNode<E> leftChild) {
+            left = leftChild;
+        }
+
+        public void setRight(BinaryTreeNode<E> rightChild) {
+            right = rightChild;
         }
     }
-    public LinkedBinaryTree() {
-        super();
+
+    /**
+     * LinkedBinaryTree variables
+     */
+    public BinaryTreeNode<E> root = null;
+    private int size = 0;
+    public LinkedBinaryTree() {}
+
+    /**
+     * Methods
+     */
+    public int size(){
+        return size;
+    }
+    public boolean isEmpty(){
+        return size == 0;
+    }
+    public BinaryTreeNode<E> createNode(E e, BinaryTreeNode<E> parent, BinaryTreeNode left, BinaryTreeNode<E> right){
+        return new BinaryTreeNode<>(e, parent, left, right);
     }
 
+    //public
     @Override
     public Node left(Node p) throws IllegalArgumentException {
         return null;
