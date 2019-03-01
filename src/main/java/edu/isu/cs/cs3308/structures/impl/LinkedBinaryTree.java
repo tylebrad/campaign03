@@ -75,13 +75,13 @@ public class LinkedBinaryTree<E> implements BinaryTree<E> {
         return size;
     }
     public boolean isEmpty(){
-        return size == 0;
+        return root == null;
     }
     public BinaryTreeNode<E> createNode(E e, BinaryTreeNode<E> parent, BinaryTreeNode left, BinaryTreeNode<E> right){
         return new BinaryTreeNode<>(e, parent, left, right);
     }
-
-    //public
+    public void setRoot(){
+    }
     @Override
     public Node left(Node p) throws IllegalArgumentException {
         return null;
