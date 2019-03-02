@@ -80,7 +80,11 @@ public class LinkedBinaryTree<E> implements BinaryTree<E> {
     public BinaryTreeNode<E> createNode(E e, BinaryTreeNode<E> parent, BinaryTreeNode left, BinaryTreeNode<E> right){
         return new BinaryTreeNode<>(e, parent, left, right);
     }
-    public void setRoot(){
+    public BinaryTreeNode<E> root(){
+        return root;
+    }
+    public void setRoot(E newRoot){
+        root.setElement(newRoot);
     }
     @Override
     public Node left(Node p) throws IllegalArgumentException {

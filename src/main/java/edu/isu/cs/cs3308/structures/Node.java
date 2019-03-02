@@ -7,7 +7,6 @@ package edu.isu.cs.cs3308.structures;
  * @param <E> The Type of element to be contained
  */
 public interface Node<E> {
-
     /**
      * @return The element contained in this node.
      */
