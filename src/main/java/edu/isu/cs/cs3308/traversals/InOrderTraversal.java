@@ -4,5 +4,12 @@
 //
 package edu.isu.cs.cs3308.traversals;
 
-public class InOrderTraversal {
+import edu.isu.cs.cs3308.structures.Node;
+
+public class InOrderTraversal<E> extends DepthFirstTraversal<E>{
+
+    /**
+     * Do this
+     */
+    //public void subTree(Node<E> node, )
 }

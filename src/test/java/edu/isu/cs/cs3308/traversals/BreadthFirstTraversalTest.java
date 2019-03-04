@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
  *
  * @author fate
  */
-public class BreadthFirstTraversalTest {
+public class BreadthFirstTraversalTest extends AbstractTraversal{
 
     private TreeTraversal<Integer> fixture;
     private Tree<Integer> tree;
