@@ -15,6 +15,10 @@ public class DepthFirstTraversal<E> extends AbstractTraversal<E> {
     public DepthFirstTraversal(){
 
     }
+    List<Node<E>> list = new ArrayList<>();
+    public void subTree(Node<E> node, List<Node<E>> list){
+        return;
+    }
     public DepthFirstTraversal(Tree<E> tree){
         newTree = tree;
     }
@@ -24,16 +28,20 @@ public class DepthFirstTraversal<E> extends AbstractTraversal<E> {
      */
     @Override
     public Iterable<Node<E>> traverse() {
+        traverseFrom(newTree.root());
         return null;
     }
 
-    /**
-     * And this
-     * @param node
-     * @return
-     */
     @Override
     public Iterable<Node> traverseFrom(Node node) {
+        return super.traverseFrom(node);
+    }
+
+
+    public List<Node<E>> subTreeTraverse(Node<E> currentNode){
+        List<Node<E>> list = new ArrayList<>();
+        if(newTree != null)
+            subTree( currentNode, list);
         return null;
     }
 

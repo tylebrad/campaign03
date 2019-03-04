@@ -17,7 +17,7 @@ public class InOrderTraversal<E> extends DepthFirstTraversal<E>{
     /**
      * Do this
      */
+    List<Node<E>> list = new ArrayList<>();
     public void subTree(Node<E> node, List<Node<E>> list){
-        return;
     }
 }

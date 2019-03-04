@@ -27,7 +27,8 @@ public class BreadthFirstTraversal<E> extends AbstractTraversal<E>{
      */
     @Override
     public Iterable<Node<E>> traverse() {
-        return super.traverse();
+        traverseFrom(test.root());
+        return null;
     }
 
     /**
