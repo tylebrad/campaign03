@@ -4,9 +4,23 @@
 // BreadthFirstTraversal -
 package edu.isu.cs.cs3308.traversals;
 
+import java.util.List;
 import edu.isu.cs.cs3308.structures.Node;
+import edu.isu.cs.cs3308.structures.impl.LinkedBinaryTree;
+import edu.isu.cs.cs3308.structures.Tree;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BreadthFirstTraversal<E> extends AbstractTraversal<E>{
+
+    public void enqueue(Node<E> node, List<Node<E>> queue) {
+        queue.add(node);
+    }
+
+    Tree<E> test;
+    public BreadthFirstTraversal(Tree<E> tree){
+        test = tree;
+    }
     /**
      * Do this
      * @return
