@@ -14,9 +14,16 @@ public class LinkedBinaryTree<E> implements BinaryTree<E>, Tree<E> {
         public E element;
         public BinaryTreeNode<E> parent, left, right;
 
+        // Child Node Constructor
         public BinaryTreeNode(E item, BinaryTreeNode<E> above, BinaryTreeNode<E> leftChild, BinaryTreeNode<E> rightChild) {
             element = item;
             parent = above;
+            left = leftChild;
+            right = rightChild;
+        }
+        // Root constructor
+        public BinaryTreeNode(E item, BinaryTreeNode<E> leftChild, BinaryTreeNode<E> rightChild){
+            element = item;
             left = leftChild;
             right = rightChild;
         }
@@ -63,13 +70,13 @@ public class LinkedBinaryTree<E> implements BinaryTree<E>, Tree<E> {
     // Methods
 
     // Creates a BinaryTreeNode
-    public BinaryTreeNode<E> createNode(E e, BinaryTreeNode<E> parent, BinaryTreeNode left, BinaryTreeNode<E> right)
+    public BinaryTreeNode<E> createNode(E e, BinaryTreeNode<E> parent, BinaryTreeNode<E> left, BinaryTreeNode<E> right)
     throws IllegalArgumentException
     {
         if (e == null)
             throw new IllegalArgumentException();
 
-        return new BinaryTreeNode<>(e, parent, left, right);
+        return new BinaryTreeNode<E>(e, parent, left, right);
     }
 
     // Returns root of tree, or null if empty
@@ -80,24 +87,44 @@ public class LinkedBinaryTree<E> implements BinaryTree<E>, Tree<E> {
         else
             return root;
     }
-
+    /**
+     * Sets the tree's root node to the provided item, by creating a new node
+     * (unless the given item is the same as the current root's item). Note that
+     * this must also reset the size of the tree to the correct value if the
+     * current node is replaced.
+     *
+     * @param item New item for the root node.
+     * @return The new root node.
+     */
     // Creates a new root with given item, unless null or the same root;
     @Override
     public Node<E> setRoot(E item) {
-        BinaryTreeNode<E> newRoot = new BinaryTreeNode(item, null, null, null);
-        if(item == null || item == root.element)
+        BinaryTreeNode<E> newRoot = new BinaryTreeNode(item, null, null);
+        if(item == null)
             return null;
         else
-            root = newRoot;
-        size++;
-        return root;
+            this.root = newRoot;
+            size = 1;
+        return newRoot;
     }
-
+    /**
+     * Inserts the item into the tree under the provided node. If the provided
+     * node is null the item becomes the new root of the tree, beware.
+     *
+     * @param item Item to be inserted into the tree.
+     * @param p The parent node of the tree, if null the item becomes the new
+     * root so beware.
+     * @return True if the item was able to be inserted, false otherwise (for
+     * example the item was null)
+     * @throws IllegalArgumentException if the provided parent node is invalid,
+     * or the provided value is null.
+     */
     // Inserts given item into the tree, UNDER the provided node.
     // If the provided node is null, the item becomes the new root.
     @Override
-    public Node<E> insert(E item, Node<E> p) {
-        if(item == null)
+    public Node<E> insert(E item, Node<E> p) throws IllegalArgumentException {
+        BinaryTreeNode<E> node = (BinaryTreeNode<E>)validate(p);
+        if(item == null || p == null)
             throw new IllegalArgumentException();
         return null;
 
@@ -200,6 +227,8 @@ public class LinkedBinaryTree<E> implements BinaryTree<E>, Tree<E> {
 
     @Override
     public E set(Node<E> node, E element) throws IllegalArgumentException {
+        if (node == null || element == null)
+            throw new IllegalArgumentException();
         BinaryTreeNode<E> newNode = (BinaryTreeNode<E>)validate(node);
         E temp = newNode.getElement();
         newNode.setElement(element);
@@ -210,10 +239,10 @@ public class LinkedBinaryTree<E> implements BinaryTree<E>, Tree<E> {
     @Override
     public Node<E> validate(Node<E> p) throws IllegalArgumentException {
         if(!(p instanceof BinaryTreeNode))
-            throw new IllegalArgumentException("Not valid position type");
+            throw new IllegalArgumentException();
         BinaryTreeNode<E> node = (BinaryTreeNode<E>) p;
         if(node.getParent() == node)
-            throw new IllegalArgumentException("Element is no longer in the tree");
+            throw new IllegalArgumentException();
         return node;
     }
 
