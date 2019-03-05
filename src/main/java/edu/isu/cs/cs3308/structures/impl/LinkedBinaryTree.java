@@ -34,13 +34,13 @@ public class LinkedBinaryTree<E> implements BinaryTree<E>, Tree<E> {
         }
         @Override
         public BinaryTreeNode<E> getParent() {
-            return parent;
+            return this.parent;
         }
         public BinaryTreeNode<E> getLeft() {
-            return left;
+            return this.left;
         }
         public BinaryTreeNode<E> getRight() {
-            return right;
+            return this.right;
         }
 
         // Update Methods
@@ -87,15 +87,7 @@ public class LinkedBinaryTree<E> implements BinaryTree<E>, Tree<E> {
         else
             return root;
     }
-    /**
-     * Sets the tree's root node to the provided item, by creating a new node
-     * (unless the given item is the same as the current root's item). Note that
-     * this must also reset the size of the tree to the correct value if the
-     * current node is replaced.
-     *
-     * @param item New item for the root node.
-     * @return The new root node.
-     */
+
     // Creates a new root with given item, unless null or the same root;
     @Override
     public Node<E> setRoot(E item) {
@@ -165,10 +157,10 @@ public class LinkedBinaryTree<E> implements BinaryTree<E>, Tree<E> {
     @Override
     public Node<E> addLeft(Node<E> p, E element) throws IllegalArgumentException {
         BinaryTreeNode<E> parent = (BinaryTreeNode<E>) validate(p);
-        if(parent.getRight() != null)
+        if(parent.getLeft() != null)
             throw new IllegalArgumentException();
         BinaryTreeNode<E> child = createNode(element, parent, null, null);
-        parent.setRight(child);
+        parent.setLeft(child);
         size++;
         return child;
     }
@@ -176,10 +168,10 @@ public class LinkedBinaryTree<E> implements BinaryTree<E>, Tree<E> {
     @Override
     public Node<E> addRight(Node<E> p, E element) throws IllegalArgumentException {
         BinaryTreeNode<E> parent = (BinaryTreeNode<E>) validate(p);
-        if(parent.getLeft() != null)
+        if(parent.getRight() != null)
             throw new IllegalArgumentException();
         BinaryTreeNode<E> child = createNode(element, parent, null, null);
-        parent.setLeft(child);
+        parent.setRight(child);
         size++;
         return child;
     }
@@ -199,10 +191,13 @@ public class LinkedBinaryTree<E> implements BinaryTree<E>, Tree<E> {
     // Returns number of children of the provided parent Node
     @Override
     public int numChildren(Node<E> p) throws IllegalArgumentException {
+        BinaryTreeNode<E> node = (BinaryTreeNode<E>) validate(p);
         int num = 0;
-        BinaryTreeNode<E> parent = (BinaryTreeNode<E>) validate(p);
-        //if(parent.getRight() != null)
-        return 0;
+        if(right(p) != null)
+            num++;
+        if(left(p) != null)
+            num++;
+        return num;
     }
 
     @Override
@@ -217,12 +212,35 @@ public class LinkedBinaryTree<E> implements BinaryTree<E>, Tree<E> {
 
     @Override
     public boolean isRoot(Node<E> p) throws IllegalArgumentException {
+        BinaryTreeNode<E> newNode = (BinaryTreeNode<E>)validate(p);
+        if (p.getParent() == null)
+            return true;
         return false;
     }
 
+    // Removes given item at given Node
     @Override
     public boolean remove(E item, Node<E> p) throws IllegalArgumentException {
-        return false;
+        if(p == null){
+            return false;
+        }
+        BinaryTreeNode<E> node = (BinaryTreeNode<E>) validate(p);
+        if(numChildren(p) == 2)
+            throw new IllegalArgumentException();
+        BinaryTreeNode<E> child = node.getLeft() != null ? node.getLeft() : node.getRight();
+        if (child != null)
+            child.setParent(node.getParent());
+        if (node == root)
+            root = child;
+        else {
+            BinaryTreeNode<E> parent = node.getParent();
+            if (node == parent.getLeft())
+                parent.setLeft(child);
+            else
+                parent.setRight(child);
+        }
+        size--;
+        return true;
     }
 
     @Override
@@ -238,6 +256,8 @@ public class LinkedBinaryTree<E> implements BinaryTree<E>, Tree<E> {
     // Validates the position and returns it as a node
     @Override
     public Node<E> validate(Node<E> p) throws IllegalArgumentException {
+        if(this.root == null)
+            throw new IllegalArgumentException();
         if(!(p instanceof BinaryTreeNode))
             throw new IllegalArgumentException();
         BinaryTreeNode<E> node = (BinaryTreeNode<E>) p;
