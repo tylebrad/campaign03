@@ -15,7 +15,27 @@ public class PreOrderTraversal<E> extends DepthFirstTraversal<E>{
         newTree = tree;
     }
 
-    public void subTree(Node<E> node, List<Node<E>> list){
+    public PreOrderTraversal() {
+        super();
+    }
 
+    @Override
+    public void subtree(Node<E> node, List<Node<E>> list) {
+        super.subtree(node, list);
+    }
+
+    @Override
+    public Iterable<Node<E>> traverse() {
+        return super.traverse();
+    }
+
+    @Override
+    public Iterable<Node> traverseFrom(Node node) {
+        return super.traverseFrom(node);
+    }
+
+    @Override
+    public List<Node<E>> subTreeTraverse(Node<E> currentNode) {
+        return super.subTreeTraverse(currentNode);
     }
 }

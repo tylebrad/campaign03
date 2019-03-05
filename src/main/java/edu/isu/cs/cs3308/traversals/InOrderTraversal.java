@@ -14,10 +14,28 @@ public class InOrderTraversal<E> extends DepthFirstTraversal<E>{
     InOrderTraversal(Tree<E> tree){
         newTree = tree;
     }
-    /**
-     * Do this
-     */
-    List<Node<E>> list = new ArrayList<>();
-    public void subTree(Node<E> node, List<Node<E>> list){
+
+    public InOrderTraversal() {
+        super();
+    }
+
+    @Override
+    public Iterable<Node<E>> traverse() {
+        return super.traverse();
+    }
+
+    @Override
+    public Iterable<Node> traverseFrom(Node node) {
+        return super.traverseFrom(node);
+    }
+
+    @Override
+    public List<Node<E>> subTreeTraverse(Node<E> currentNode) {
+        return super.subTreeTraverse(currentNode);
+    }
+
+    @Override
+    public void subtree(Node<E> node, List<Node<E>> list) {
+        super.subtree(node, list);
     }
 }

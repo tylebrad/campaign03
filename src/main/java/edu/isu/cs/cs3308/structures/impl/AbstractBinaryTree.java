@@ -3,29 +3,31 @@ package edu.isu.cs.cs3308.structures.impl;
 import edu.isu.cs.cs3308.structures.BinaryTree;
 import edu.isu.cs.cs3308.structures.Node;
 
-public class AbstractBinaryTree implements BinaryTree {
+
+public abstract class AbstractBinaryTree<E> implements BinaryTree<E> {
+
     @Override
-    public Node left(Node p) throws IllegalArgumentException {
+    public Node<E> left(Node<E> p) throws IllegalArgumentException {
         return null;
     }
 
     @Override
-    public Node right(Node p) throws IllegalArgumentException {
+    public Node<E> right(Node<E> p) throws IllegalArgumentException {
         return null;
     }
 
     @Override
-    public Node sibling(Node p) throws IllegalArgumentException {
+    public Node<E> sibling(Node<E> p) throws IllegalArgumentException {
         return null;
     }
 
     @Override
-    public Node addLeft(Node p, Object element) throws IllegalArgumentException {
+    public Node<E> addLeft(Node<E> p, E element) throws IllegalArgumentException {
         return null;
     }
 
     @Override
-    public Node addRight(Node p, Object element) throws IllegalArgumentException {
+    public Node<E> addRight(Node<E> p, E element) throws IllegalArgumentException {
         return null;
     }
 }

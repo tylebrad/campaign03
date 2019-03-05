@@ -146,9 +146,11 @@ public class LinkedBinaryTree<E> implements BinaryTree<E>, Tree<E> {
         return null;
     }
 
+    // Returns the position of p's parent or null if p is root
     @Override
     public Node<E> parent(Node<E> p) throws IllegalArgumentException {
-        return null;
+        Node<E> node = validate(p);
+        return node.getParent();
     }
 
     @Override
@@ -186,9 +188,15 @@ public class LinkedBinaryTree<E> implements BinaryTree<E>, Tree<E> {
         return null;
     }
 
+    // Validates the position and returns it as a node
     @Override
     public Node<E> validate(Node<E> p) throws IllegalArgumentException {
-        return null;
+        if(!(p instanceof Node))
+            throw new IllegalArgumentException("Not valid position type");
+        Node<E> node = (Node<E>) p;
+        if(node.getParent() == node)
+            throw new IllegalArgumentException("Element is no longer in the tree");
+        return node;
     }
 
     @Override

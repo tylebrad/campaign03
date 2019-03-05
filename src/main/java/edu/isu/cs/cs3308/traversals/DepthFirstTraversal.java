@@ -16,7 +16,7 @@ public class DepthFirstTraversal<E> extends AbstractTraversal<E> {
 
     }
     List<Node<E>> list = new ArrayList<>();
-    public void subTree(Node<E> node, List<Node<E>> list){
+    public void subtree(Node<E> node, List<Node<E>> list){
         return;
     }
     public DepthFirstTraversal(Tree<E> tree){
@@ -41,7 +41,7 @@ public class DepthFirstTraversal<E> extends AbstractTraversal<E> {
     public List<Node<E>> subTreeTraverse(Node<E> currentNode){
         List<Node<E>> list = new ArrayList<>();
         if(newTree != null)
-            subTree( currentNode, list);
+            subtree( currentNode, list);
         return null;
     }
 
