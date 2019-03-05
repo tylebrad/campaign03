@@ -93,19 +93,6 @@ public class LinkedBinaryTree<E> implements BinaryTree<E>, Tree<E> {
         return root;
     }
 
-    /**
-     * Inserts the item into the tree under the provided node. If the provided
-     * node is null the item becomes the new root of the tree, beware.
-     *
-     * @param item Item to be inserted into the tree.
-     * @param p The parent node of the tree, if null the item becomes the new
-     * root so beware.
-     * @return True if the item was able to be inserted, false otherwise (for
-     * example the item was null)
-     * @throws IllegalArgumentException if the provided parent node is invalid,
-     * or the provided value is null.
-     */
-
     // Inserts given item into the tree, UNDER the provided node.
     // If the provided node is null, the item becomes the new root.
     @Override
@@ -126,30 +113,48 @@ public class LinkedBinaryTree<E> implements BinaryTree<E>, Tree<E> {
         return root == null;
     }
 
+    // Returns left node of provided parent Node
     @Override
     public Node<E> left(Node<E> p) throws IllegalArgumentException {
         BinaryTreeNode<E> node = (BinaryTreeNode<E>)validate(p);
         return node.getLeft();
     }
 
+    // Returns right node of the provided parent Node
     @Override
-    public Node right(Node p) throws IllegalArgumentException {
+    public Node<E> right(Node<E> p) throws IllegalArgumentException {
+        BinaryTreeNode<E> node = (BinaryTreeNode<E>)validate(p);
+        return node.getRight();
+    }
+
+    // Returns the sibling node of a given child Node
+    @Override
+    public Node<E> sibling(Node<E> p) throws IllegalArgumentException {
+        BinaryTreeNode<E> node = (BinaryTreeNode<E>)validate(p);
         return null;
     }
 
+
     @Override
-    public Node sibling(Node p) throws IllegalArgumentException {
-        return null;
+    public Node<E> addLeft(Node<E> p, E element) throws IllegalArgumentException {
+        BinaryTreeNode<E> parent = (BinaryTreeNode<E>) validate(p);
+        if(parent.getRight() != null)
+            throw new IllegalArgumentException();
+        BinaryTreeNode<E> child = createNode(element, parent, null, null);
+        parent.setRight(child);
+        size++;
+        return child;
     }
 
     @Override
-    public Node addLeft(Node p, Object element) throws IllegalArgumentException {
-        return null;
-    }
-
-    @Override
-    public Node addRight(Node p, Object element) throws IllegalArgumentException {
-        return null;
+    public Node<E> addRight(Node<E> p, E element) throws IllegalArgumentException {
+        BinaryTreeNode<E> parent = (BinaryTreeNode<E>) validate(p);
+        if(parent.getLeft() != null)
+            throw new IllegalArgumentException();
+        BinaryTreeNode<E> child = createNode(element, parent, null, null);
+        parent.setLeft(child);
+        size++;
+        return child;
     }
 
     // Returns the position of p's parent or null if p is root
@@ -164,8 +169,12 @@ public class LinkedBinaryTree<E> implements BinaryTree<E>, Tree<E> {
         return null;
     }
 
+    // Returns number of children of the provided parent Node
     @Override
     public int numChildren(Node<E> p) throws IllegalArgumentException {
+        int num = 0;
+        BinaryTreeNode<E> parent = (BinaryTreeNode<E>) validate(p);
+        //if(parent.getRight() != null)
         return 0;
     }
 
@@ -191,7 +200,10 @@ public class LinkedBinaryTree<E> implements BinaryTree<E>, Tree<E> {
 
     @Override
     public E set(Node<E> node, E element) throws IllegalArgumentException {
-        return null;
+        BinaryTreeNode<E> newNode = (BinaryTreeNode<E>)validate(node);
+        E temp = newNode.getElement();
+        newNode.setElement(element);
+        return temp;
     }
 
     // Validates the position and returns it as a node
