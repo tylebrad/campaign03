@@ -26,13 +26,13 @@ public class LinkedBinaryTree<E> implements BinaryTree<E>, Tree<E> {
             return element;
         }
         @Override
-        public Node<E> getParent() {
+        public BinaryTreeNode<E> getParent() {
             return parent;
         }
-        public Node<E> getLeft() {
+        public BinaryTreeNode<E> getLeft() {
             return left;
         }
-        public Node<E> getRight() {
+        public BinaryTreeNode<E> getRight() {
             return right;
         }
 
@@ -128,9 +128,8 @@ public class LinkedBinaryTree<E> implements BinaryTree<E>, Tree<E> {
 
     @Override
     public Node<E> left(Node<E> p) throws IllegalArgumentException {
-        Node<E> node = validate(p);
-        //return node.getLeft();
-        return null;
+        BinaryTreeNode<E> node = (BinaryTreeNode<E>)validate(p);
+        return node.getLeft();
     }
 
     @Override
@@ -156,7 +155,7 @@ public class LinkedBinaryTree<E> implements BinaryTree<E>, Tree<E> {
     // Returns the position of p's parent or null if p is root
     @Override
     public Node<E> parent(Node<E> p) throws IllegalArgumentException {
-        Node<E> node = validate(p);
+        BinaryTreeNode<E> node = (BinaryTreeNode<E>)validate(p);
         return node.getParent();
     }
 
@@ -198,9 +197,9 @@ public class LinkedBinaryTree<E> implements BinaryTree<E>, Tree<E> {
     // Validates the position and returns it as a node
     @Override
     public Node<E> validate(Node<E> p) throws IllegalArgumentException {
-        if(!(p instanceof Node))
+        if(!(p instanceof BinaryTreeNode))
             throw new IllegalArgumentException("Not valid position type");
-        Node<E> node = (Node<E>) p;
+        BinaryTreeNode<E> node = (BinaryTreeNode<E>) p;
         if(node.getParent() == node)
             throw new IllegalArgumentException("Element is no longer in the tree");
         return node;
