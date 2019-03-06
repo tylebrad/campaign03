@@ -64,7 +64,7 @@ public class LinkedBinaryTree<E> implements BinaryTree<E>, Tree<E> {
 
     // Class global variables
     public BinaryTreeNode<E> root = null;
-    private int size = 0;
+    public int size = 0;
     public LinkedBinaryTree() {}
 
     // Methods
@@ -116,10 +116,11 @@ public class LinkedBinaryTree<E> implements BinaryTree<E>, Tree<E> {
     @Override
     public Node<E> insert(E item, Node<E> p) throws IllegalArgumentException {
         BinaryTreeNode<E> node = (BinaryTreeNode<E>)validate(p);
-        if(item == null || p == null)
+        if(item == null )
             throw new IllegalArgumentException();
-        return null;
-
+        if(p == null)
+            setRoot(item);
+        return node;
     }
 
     @Override
