@@ -15,7 +15,7 @@ public class AbstractTraversal<E> implements TreeTraversal<E> {
     }
 
     @Override
-    public Iterable<Node> traverseFrom(Node node) {
+    public Iterable<Node<E>> traverseFrom(Node node) {
         return null;
     }
 

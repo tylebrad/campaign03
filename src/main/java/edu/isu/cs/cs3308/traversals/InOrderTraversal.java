@@ -6,6 +6,8 @@ package edu.isu.cs.cs3308.traversals;
 
 import edu.isu.cs.cs3308.structures.Tree;
 import edu.isu.cs.cs3308.structures.Node;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +27,7 @@ public class InOrderTraversal<E> extends DepthFirstTraversal<E>{
     }
 
     @Override
-    public Iterable<Node> traverseFrom(Node node) {
+    public Iterable<Node<E>> traverseFrom(Node node) {
         return super.traverseFrom(node);
     }
 

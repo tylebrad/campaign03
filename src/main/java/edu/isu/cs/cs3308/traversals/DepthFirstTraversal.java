@@ -6,18 +6,18 @@ package edu.isu.cs.cs3308.traversals;
 
 import edu.isu.cs.cs3308.structures.Node;
 import edu.isu.cs.cs3308.structures.Tree;
+import edu.isu.cs.cs3308.structures.impl.LinkedBinaryTree;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DepthFirstTraversal<E> extends AbstractTraversal<E> {
 
     public Tree<E> newTree;
-    public DepthFirstTraversal(){
-
-    }
+    public DepthFirstTraversal() {}
     List<Node<E>> list = new ArrayList<>();
     public void subtree(Node<E> node, List<Node<E>> list){
-        return;
     }
     public DepthFirstTraversal(Tree<E> tree){
         newTree = tree;
@@ -33,16 +33,16 @@ public class DepthFirstTraversal<E> extends AbstractTraversal<E> {
     }
 
     @Override
-    public Iterable<Node> traverseFrom(Node node) {
-        return super.traverseFrom(node);
+    public Iterable<Node<E>> traverseFrom(Node node) {
+        subTreeTraverse(node);
+        return null;
     }
-
 
     public List<Node<E>> subTreeTraverse(Node<E> currentNode){
         List<Node<E>> list = new ArrayList<>();
-        if(newTree != null)
-            subtree( currentNode, list);
-        return null;
+        if(newTree.isEmpty())
+            subtree(currentNode, list);
+        return list;
     }
 
 }
