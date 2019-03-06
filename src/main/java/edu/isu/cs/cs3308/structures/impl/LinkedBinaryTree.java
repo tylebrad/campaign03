@@ -92,25 +92,16 @@ public class LinkedBinaryTree<E> implements BinaryTree<E>, Tree<E> {
     @Override
     public Node<E> setRoot(E item) {
         BinaryTreeNode<E> newRoot = new BinaryTreeNode(item, null, null);
-        if(item == null)
+        if(item == null) {
+            this.size = 0;
             return null;
+        }
         else
             this.root = newRoot;
             size = 1;
         return newRoot;
     }
-    /**
-     * Inserts the item into the tree under the provided node. If the provided
-     * node is null the item becomes the new root of the tree, beware.
-     *
-     * @param item Item to be inserted into the tree.
-     * @param p The parent node of the tree, if null the item becomes the new
-     * root so beware.
-     * @return True if the item was able to be inserted, false otherwise (for
-     * example the item was null)
-     * @throws IllegalArgumentException if the provided parent node is invalid,
-     * or the provided value is null.
-     */
+
     // Inserts given item into the tree, UNDER the provided node.
     // If the provided node is null, the item becomes the new root.
     @Override
@@ -120,9 +111,29 @@ public class LinkedBinaryTree<E> implements BinaryTree<E>, Tree<E> {
             throw new IllegalArgumentException();
         if(p == null)
             setRoot(item);
-        return node;
+        if(numChildren(node) == 2)
+            throw new IllegalArgumentException();
+        BinaryTreeNode<E> newNode = createNode(item, node, null, null);
+        insert(newNode, node);
+        size++;
+        return newNode;
     }
 
+    private void insert(BinaryTreeNode<E> node, BinaryTreeNode<E> parent) {
+        if (parent.getLeft() == null) {
+            node.setParent(parent);
+            parent.setLeft(node);
+        }
+
+        else if (parent.getRight() == null) {
+            node.setParent(parent);
+            parent.setRight(node);
+        }
+
+        else {
+            insert(node, parent.getLeft());
+        }
+    }
     @Override
     public int size() {
         return size;
@@ -222,11 +233,10 @@ public class LinkedBinaryTree<E> implements BinaryTree<E>, Tree<E> {
     // Removes given item at given Node
     @Override
     public boolean remove(E item, Node<E> p) throws IllegalArgumentException {
-        if(p == null){
+        if (item == null || p == null)
             return false;
-        }
         BinaryTreeNode<E> node = (BinaryTreeNode<E>) validate(p);
-        if(numChildren(p) == 2)
+        if(numChildren(p) == 0)
             throw new IllegalArgumentException();
         BinaryTreeNode<E> child = node.getLeft() != null ? node.getLeft() : node.getRight();
         if (child != null)
